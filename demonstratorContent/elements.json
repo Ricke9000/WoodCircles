@@ -1,0 +1,255 @@
+{
+  "elements": [
+    {
+      "id": "A125",
+      "data": "Element A125",
+      "stages": [
+        {
+          "stage": 0,
+          "data": "Tartu",
+          "startDate": "2026-03-01",
+          "phase": { "buildingid": "Tartu" }
+        },
+        { "stage": 1, "data": "transport", "startDate": "2026-05-01" },
+        {
+          "stage": 2,
+          "data": "Torino",
+          "startDate": "2026-07-01",
+          "phase": { "buildingid": "Torino" }
+        },
+        { "stage": 3, "data": "transport", "startDate": "2026-09-01" },
+        {
+          "stage": 4,
+          "data": "Rotterdam",
+          "startDate": "2026-11-01",
+          "phase": { "buildingid": "Rotterdam" }
+        },
+        { "stage": 5, "data": "transport", "startDate": "2027-01-01" },
+        {
+          "stage": 6,
+          "data": "Taastrup",
+          "startDate": "2027-03-01",
+          "phase": { "buildingid": "Taastrup" }
+        }
+      ],
+      "metadata": [
+        {
+          "id": 0,
+          "date": "2026-03-01",
+          "data": [{ "building": "Tartu", "EPD": 20.5 }]
+        },
+        {
+          "id": 1,
+          "date": "2026-05-01",
+          "data": [{ "building": "null", "EPD": 20.5 }]
+        },
+        {
+          "id": 2,
+          "date": "2026-07-01",
+          "data": [{ "building": "Torino", "EPD": 20.5 }]
+        },
+        {
+          "id": 3,
+          "date": "2026-09-01",
+          "data": [{ "building": "null", "EPD": 20.5 }]
+        },
+        {
+          "id": 4,
+          "date": "2026-11-01",
+          "data": [{ "building": "Rotterdam", "EPD": 20.5 }]
+        },
+        {
+          "id": 5,
+          "date": "2027-01-01",
+          "data": [{ "building": "null", "EPD": 20.5 }]
+        },
+        {
+          "id": 6,
+          "date": "2027-03-01",
+          "data": [{ "building": "Taastrup", "EPD": 20.5 }]
+        }
+      ]
+    },
+    {
+      "id": "B005",
+      "data": "dog",
+      "stages": [
+        {
+          "stage": 0,
+          "data": "Tartu",
+          "startDate": "2026-03-01",
+          "phase": { "buildingid": "Tartu" }
+        },
+        { "stage": 1, "data": "transport", "startDate": "2026-05-01" },
+        {
+          "stage": 2,
+          "data": "Torino",
+          "startDate": "2026-07-01",
+          "phase": { "buildingid": "Torino" }
+        },
+        { "stage": 3, "data": "transport", "startDate": "2026-09-01" },
+        {
+          "stage": 4,
+          "data": "Rotterdam",
+          "startDate": "2026-11-01",
+          "phase": { "buildingid": "Rotterdam" }
+        },
+        { "stage": 5, "data": "transport", "startDate": "2027-01-01" },
+        {
+          "stage": 6,
+          "data": "Taastrup",
+          "startDate": "2027-03-01",
+          "phase": { "buildingid": "Taastrup" }
+        }
+      ],
+      "metadata": [
+        {
+          "id": 0,
+          "date": "2026-03-01",
+          "data": [
+            {
+              "building": "Tartu001",
+              "psets": [
+                { "psetname": "DFAD", "hazardscore": 0 },
+                { "psetname": "LCC", "co2e": 125 },
+                { "psetname": "STORAENSO", "clt_data": "information" }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 1,
+          "date": "2026-05-01",
+          "data": [
+            {
+              "building": "null",
+              "psets": [
+                { "psetname": "DFAD", "hazardscore": 0 },
+                { "psetname": "LCC", "co2e": 120 },
+                { "psetname": "STORAENSO", "clt_data": "information" }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "date": "2026-07-01",
+          "data": [
+            {
+              "building": "Torino",
+              "psets": [
+                { "psetname": "DFAD", "hazardscore": 0 },
+                { "psetname": "LCC", "co2e": 115 },
+                { "psetname": "STORAENSO", "clt_data": "information" }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "date": "2026-09-01",
+          "data": [
+            {
+              "building": "null",
+              "psets": [
+                { "psetname": "DFAD", "hazardscore": 0 },
+                { "psetname": "LCC", "co2e": 110 },
+                { "psetname": "STORAENSO", "clt_data": "information" }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "date": "2026-11-01",
+          "data": [
+            {
+              "building": "Rotterdam",
+              "psets": [
+                { "psetname": "DFAD", "hazardscore": 0 },
+                { "psetname": "LCC", "co2e": 105 },
+                { "psetname": "STORAENSO", "clt_data": "information" }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "date": "2027-01-01",
+          "data": [
+            {
+              "building": "null",
+              "psets": [
+                { "psetname": "DFAD", "hazardscore": 0 },
+                { "psetname": "LCC", "co2e": 100 },
+                { "psetname": "STORAENSO", "clt_data": "information" }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 6,
+          "date": "2027-03-01",
+          "data": [
+            {
+              "building": "Taastrup",
+              "psets": [
+                { "psetname": "DFAD", "hazardscore": 0 },
+                { "psetname": "LCC", "co2e": 95 },
+                { "psetname": "STORAENSO", "clt_data": "information" }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "buildings": [
+    {
+      "id": "Tartu",
+      "name": "Tartu",
+      "image": "./img/Tartu.png",
+      "directs": [
+        {
+          "type": 0,
+          "url": "https://loadplanner.storaenso.com/#/editor/view/69d77b0201423b564465bb7d?token=77d1f0aed9b044899374d33d07a802ea&mode=guest&lang=EN"
+        },
+        { "type": 1, "url": "www.trimble.com" }
+      ]
+    },
+    {
+      "id": "Torino",
+      "name": "Torino",
+      "image": "./img/Torino.png",
+      "directs": [
+        {
+          "type": 2,
+          "url": "https://web.connect.trimble.com/projects/8NAkNVoSyEE/viewer/3d/?modelId=nVH0NFgVI8U&=&origin=app21.connect.trimble.com"
+        },
+        { "type": 0, "url": "www.trimble.com" }
+      ]
+    },
+    {
+      "id": "Rotterdam",
+      "name": "Rotterdam",
+      "image": "./img/Rotterdam.png",
+      "directs": [
+        {
+          "type": 1,
+          "url": "https://web.connect.trimble.com/projects/8NAkNVoSyEE/viewer/3d/?modelId=KIIIQSifmGk&=&origin=app21.connect.trimble.com"
+        }
+      ]
+    },
+    {
+      "id": "Taastrup",
+      "name": "Taastrup",
+      "image": "./img/Taastrup.png",
+      "directs": [
+        {
+          "type": 1,
+          "url": "https://web.connect.trimble.com/projects/8NAkNVoSyEE/viewer/3d/?modelId=onR-t3wvg-Y&=&origin=app21.connect.trimble.com"
+        }
+      ]
+    }
+  ]
+}
