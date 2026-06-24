@@ -1,0 +1,50 @@
+{
+  "buildings": [
+    {
+      "id": "Tartu001",
+      "name": "Tartu",
+      "image": "./img/Tartu.png",
+      "directs": [
+        {
+          "type": 0,
+          "url": "https://loadplanner.storaenso.com/#/editor/view/69d77b0201423b564465bb7d?token=77d1f0aed9b044899374d33d07a802ea&mode=guest&lang=EN"
+        },
+        { "type": 1, "url": "www.trimble.com" }
+      ]
+    },
+    {
+      "id": "Torino002",
+      "name": "Torino",
+      "image": "./img/Torino.png",
+      "directs": [
+        {
+          "type": 2,
+          "url": "https://web.connect.trimble.com/projects/8NAkNVoSyEE/viewer/3d/?modelId=nVH0NFgVI8U&=&origin=app21.connect.trimble.com"
+        },
+        { "type": 0, "url": "www.trimble.com" }
+      ]
+    },
+    {
+      "id": "Rotterdam003",
+      "name": "Rotterdam",
+      "image": "./img/Rotterdam.png",
+      "directs": [
+        {
+          "type": 1,
+          "url": "https://web.connect.trimble.com/projects/8NAkNVoSyEE/viewer/3d/?modelId=KIIIQSifmGk&=&origin=app21.connect.trimble.com"
+        }
+      ]
+    },
+    {
+      "id": "Taastrup004",
+      "name": "Taastrup",
+      "image": "./img/Taastrup.png",
+      "directs": [
+        {
+          "type": 1,
+          "url": "https://web.connect.trimble.com/projects/8NAkNVoSyEE/viewer/3d/?modelId=onR-t3wvg-Y&=&origin=app21.connect.trimble.com"
+        }
+      ]
+    }
+  ]
+}
