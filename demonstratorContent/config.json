@@ -1,5 +1,49 @@
 {
   "phase": 0,
   "usetoday": false,
-  "alternativedate": "2026-05-01"
+  "alternativedate": "2026-05-01",
+  "stages": [
+    {
+      "id": 0,
+      "name": "Tartu",
+      "startdate": "2026-07-01",
+      "model": "https://3dwarehouse.sketchup.com/ar-view/0919b683-6140-466e-8ff7-29c510a68d80"
+    },
+    {
+      "id": 1,
+      "name": "Transport",
+      "startdate": "2026-09-01",
+      "model": "https://3dwarehouse.sketchup.com/ar-view/0919b683-6140-466e-8ff7-29c510a68d80"
+    },
+    {
+      "id": 2,
+      "name": "Torino",
+      "startdate": "2026-11-01",
+      "model": "https://3dwarehouse.sketchup.com/ar-view/0919b683-6140-466e-8ff7-29c510a68d80"
+    },
+    {
+      "id": 3,
+      "name": "Transport",
+      "startdate": "2027-01-01",
+      "model": "https://3dwarehouse.sketchup.com/ar-view/0919b683-6140-466e-8ff7-29c510a68d80"
+    },
+    {
+      "id": 4,
+      "name": "Rotterdam",
+      "startdate": "2027-03-01",
+      "model": "https://3dwarehouse.sketchup.com/ar-view/0919b683-6140-466e-8ff7-29c510a68d80"
+    },
+    {
+      "id": 5,
+      "name": "Transport",
+      "startdate": "2027-05-01",
+      "model": "https://3dwarehouse.sketchup.com/ar-view/0919b683-6140-466e-8ff7-29c510a68d80"
+    },
+    {
+      "id": 6,
+      "name": "Taastrup",
+      "startdate": "2027-07-01",
+      "model": "https://3dwarehouse.sketchup.com/ar-view/0919b683-6140-466e-8ff7-29c510a68d80"
+    }
+  ]
 }
