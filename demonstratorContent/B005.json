@@ -12,7 +12,7 @@
               "psetname": "Object",
               "data": [
                 { "building-id": "Tartu001" },
-                { "dpp.permalink": "www.link.com" }
+                { "dpp.permalink": "www.link.com/B005" }
               ]
             },
             { "id": 1, "psetname": "DFAD", "data": [{ "hazardscore": 0 }] },
