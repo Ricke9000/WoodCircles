@@ -20,7 +20,7 @@
               "id": 2,
               "psetname": "LCC",
               "data": [
-                { "co2e": 500 },
+                { "co2e": 125 },
                 { "allocation-method": "Distributed" },
                 { "allocation-units": "years" }
               ]
