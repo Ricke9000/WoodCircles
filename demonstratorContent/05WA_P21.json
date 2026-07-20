@@ -1,5 +1,6 @@
 {
   "id": "05WA_P21",
+  "image": "https://3dwarehouse.sketchup.com/ar-view/0919b683-6140-466e-8ff7-29c510a68d80",
   "lifecycle-data": [
     {
       "id": 0,
@@ -30,6 +31,17 @@
             {
               "id": 3,
               "psetname": "STORAENSO",
+              "data": [
+                { "clt-material": "CLT 100 IBI L5S WW C24 SAN" },
+                { "clt-length": 2295 },
+                { "clt-width": 100 },
+                { "clt-thickness": 600 },
+                { "clt-weight": 53 }
+              ]
+            },
+            {
+              "id": 4,
+              "psetname": "STOddddRAENSO",
               "data": [
                 { "clt-material": "CLT 100 IBI L5S WW C24 SAN" },
                 { "clt-length": 2295 },
