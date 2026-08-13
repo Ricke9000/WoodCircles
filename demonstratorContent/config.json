@@ -5,43 +5,50 @@
     {
       "id": 0,
       "name": "Tartu",
-      "startdate": "2026-07-01",
+      "building-id": "Tartu001",
+      "startdate": "2026-07-01T00:00:00Z",
       "model": "https://3dwarehouse.sketchup.com/ar-view/0919b683-6140-466e-8ff7-29c510a68d80"
     },
     {
       "id": 1,
       "name": "Transport",
-      "startdate": "2026-09-01",
+      "building-id": null,
+      "startdate": "2026-09-01T00:00:00Z",
       "model": "https://loadplanner.storaenso.com/#/editor/view/69d77b0201423b564465bb7d?token=12eb4963018142009577083833525416&mode=guest&lang=EN"
     },
     {
       "id": 2,
       "name": "Torino",
-      "startdate": "2026-11-01",
+      "building-id": "Torino002",
+      "startdate": "2026-11-01T00:00:00Z",
       "model": "https://3dwarehouse.sketchup.com/ar-view/f808279e-ff38-4127-a51f-6ef9367c89e7"
     },
     {
       "id": 3,
       "name": "Transport",
-      "startdate": "2027-01-01",
+      "building-id": null,
+      "startdate": "2027-01-01T00:00:00Z",
       "model": "https://loadplanner.storaenso.com/#/editor/view/69d77b0201423b564465bb7d?token=12eb4963018142009577083833525416&mode=guest&lang=EN"
     },
     {
       "id": 4,
       "name": "Rotterdam",
-      "startdate": "2027-03-01",
+      "building-id": "Rotterdam003",
+      "startdate": "2027-03-01T00:00:00Z",
       "model": "https://3dwarehouse.sketchup.com/ar-view/a481f4c8-40b0-4d77-a353-2cb1ec651af8"
     },
     {
       "id": 5,
       "name": "Transport",
-      "startdate": "2027-05-01",
+      "building-id": null,
+      "startdate": "2027-05-01T00:00:00Z",
       "model": "https://loadplanner.storaenso.com/#/editor/view/69d77b0201423b564465bb7d?token=12eb4963018142009577083833525416&mode=guest&lang=EN"
     },
     {
       "id": 6,
       "name": "Taastrup",
-      "startdate": "2027-07-01",
+      "building-id": "Taastrup004",
+      "startdate": "2027-07-01T00:00:00Z",
       "model": "https://3dwarehouse.sketchup.com/ar-view/0919b683-6140-466e-8ff7-29c510a68d80"
     }
   ]

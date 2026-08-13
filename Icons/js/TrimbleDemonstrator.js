@@ -1,26 +1,15 @@
 /*******************************************************/
 /**                                                   **/
-/**               General functions                   **/
+/**                   Constants                       **/
 /**                                                   **/
 /*******************************************************/
 
-async function fetchJson(url, errorLabel) {
-  try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
-    }
-    return await response.json();
-  } catch (error) {
-    console.error(`There was a problem fetching ${errorLabel} JSON:`, error);
-    return null;
-  }
-}
-
 // server path
-const host = "http://127.0.0.1:5500/demonstratorContent/";
+//const host = "http://127.0.0.1:5500/demonstratorContent/";
+const host =
+  "https://raw.githubusercontent.com/Ricke9000/WoodCircles/refs/heads/main/demonstratorContent/";
 
-// example json
+// example Config JSON
 const exampleConfig = {
   phase: 0,
   stage: 0,
@@ -36,8 +25,11 @@ const exampleConfig = {
   ],
 };
 
+// example Passport JSON
 const examplePassport = {
-  id: "05WA_P21",
+  id: "C07",
+  image:
+    "https://3dwarehouse.sketchup.com/ar-view/e850ce97-e89b-4160-ba08-9add198214fc",
   "lifecycle-data": [
     {
       id: 0,
@@ -52,7 +44,7 @@ const examplePassport = {
                 { "building-id": "Tartu001" },
                 {
                   "dpp.permalink":
-                    "https://woodcircles.eu/demonstrator/?id=05WA_P21",
+                    "https://woodcircles.eu/demonstrator/?id=C07",
                 },
               ],
             },
@@ -84,53 +76,57 @@ const examplePassport = {
   ],
 };
 
+// Class name of the section is "demostrator" in the HTML file, Not "demonstrator".
+// TODO: update the HTML file to correct the typo in the class name to "demonstrator" for consistency.
+const sectionclass = "demostrator";
+
 /*******************************************************/
 /**                                                   **/
-/**   Sketchup Iframe in woodcircles demonstrator     **/
+/**               General functions                   **/
 /**                                                   **/
 /*******************************************************/
 
-// Visualization of the building models based on the configuration JSON.
-document.addEventListener("DOMContentLoaded", async () => {
-  // Check if the demonstrator section exists before proceeding
-  const demonstratorSection = document.querySelector(
-    ".demonstrator, .demostrator",
-  );
-
-  if (!demonstratorSection) {
-    return;
+// Fetch JSON data from a given URL and handle errors.
+async function fetchJson(url, errorLabel) {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    return await response.json();
+  } catch (error) {
+    console.error(`There was a problem fetching ${errorLabel} JSON:`, error);
+    return null;
   }
+}
 
-  //
-  const configData = await fetchJson(host + "config.json", "config");
-  if (!configData) {
-    configData = exampleConfig; // Fallback to example config if fetch fails
-    console.error("Config data could not be loaded.");
-  }
+/*******************************************************/
+/**                                                   **/
+/**               Element Manipulation                **/
+/**                                                   **/
+/*******************************************************/
 
-  //
-  const stage = configData?.stage ?? 0;
-  const modelUrl = configData?.stages[stage]?.model || "";
+//
+function addModelviewertoSection(modelURL, sectionClass) {
+  const section = document.querySelector(`.${sectionClass}`);
+  if (!section) return;
 
-  //
   const iframe = document.createElement("iframe");
-  iframe.src = modelUrl;
+  iframe.src = modelURL;
   iframe.height = "100%";
   iframe.width = "100%";
   iframe.style.display = "block";
   iframe.style.border = "0";
-  iframe.title = "W3Schools Free Online Web Tutorials";
+  iframe.title = "Trimble Demonstrator";
 
-  //
-  const afterParagraph = demonstratorSection.querySelector("p:last-of-type");
+  const afterParagraph = section.querySelector("p:last-of-type");
   if (afterParagraph) {
-    demonstratorSection.insertBefore(iframe, afterParagraph);
+    section.insertBefore(iframe, afterParagraph);
     return;
   }
 
-  //
-  demonstratorSection.appendChild(iframe);
-});
+  section.appendChild(iframe);
+}
 
 /*******************************************************/
 /**                                                   **/
@@ -201,40 +197,98 @@ function getPropertySetHTML(pSetKey, list) {
   return psetIndexSection;
 }
 
-// Visualization of the digital passport based on the element JSONs.
-document.addEventListener("DOMContentLoaded", async () => {
-  //set element identifier.
-  const urlParams = new URLSearchParams(window.location.search);
-  const elementID = urlParams.get("id") || "05WA_P21";
-  console.log("id is " + elementID);
+// first element to add to make the passport workspace
+function addTrimbleWorkSpaceToSection(elementID, warehouseURL) {
+  const trimbleWorkspaceStyleHtml =
+    `<style>` +
+    `  .trimble-workspace { height: 100%; display: flex; justify-content: center; }` +
+    `  .trimble-workspace .panel-wrapper { width: 19rem; max-width: 100%; background: #fff; border-radius: 0.12rem; box-shadow: 0 0 0.06rem rgba(54, 53, 69, 0.2), 0.12rem 0.12rem 0.5rem rgba(54, 53, 69, 0.3); display: flex; flex-direction: column; height: 100%; overflow: hidden; position: relative; }` +
+    `  .trimble-workspace .trimble-workspace-details-content { bottom: 0; display: flex; flex-direction: column; height: 100%; left: 0; overflow-y: auto; position: absolute; right: 0; top: 0; }` +
+    `  .trimble-warehouse-iframe { width: 100%; height: 100%; display: block; border: 0; }` +
+    `</style>` +
+    `<link href="./css/trimblepassport.css" rel="stylesheet" />`;
 
-  //
-  let stage = urlParams.get("stage") || null;
+  const warehouseIframeHtml =
+    `<iframe` +
+    `  class="trimble-warehouse-iframe"` +
+    `  src="${warehouseURL}"` +
+    `  title="Trimble Demonstrator">` +
+    ` </iframe>`;
 
-  // get the stage from the config data. TODO add a check to see if the config data is loaded before trying to access it
-  const configData = await fetchJson(host + "config.json", "config");
-  if (!configData) {
-    configData = exampleConfig; // Fallback to example config if fetch fails
-    stage = 0;
-    console.error("Config data could not be loaded.");
-  } else {
-    const backupStage = configData?.stage ?? 0;
-    stage = stage ?? backupStage;
+  const trimbleWorkspaceHtml =
+    ` ${trimbleWorkspaceStyleHtml} ` +
+    `<div class="trimble-workspace">` +
+    `  <div class="panel-wrapper">` +
+    `    <div class="trimble-workspace-details-content" data-cy="property-panel">` +
+    `      <!-- TOOLBAR -->` +
+    `      <div class="pset-toolbar-area">` +
+    `        <div class="title-row">` +
+    `          <div class="title">` +
+    `            <span id="passport-id" class="h3">${elementID}</span>` +
+    `          </div>` +
+    `        </div>` +
+    `      </div>` +
+    `         <!-- PANEL MIDDLE -->` +
+    `         <div class="pset-panel-middle" data-cy="pset-panel-middle">` +
+    ` ${warehouseIframeHtml} ` +
+    `           <!-- Collapse-all toolbar row -->` +
+    `           <section class="pset-collapse-all-group pset-skip_next_separator">` +
+    `             <div class="pset-separator"></div>` +
+    `             <section class="pset-favorite-or-not-text">` +
+    `               <span class="h6 text-muted">Properties</span>` +
+    `             </section>` +
+    `           </section>` +
+    `           <div class="pset-separator"></div>` +
+    `         </div>` +
+    `         <!-- end pset-panel-middle -->` +
+    `       </div>` +
+    `       <!-- end trimble-workspace-details-content -->` +
+    `     </div>` +
+    `     <!-- end panel-wrapper -->` +
+    `   </div>` +
+    `   <!-- end trimble-workspace -->`;
+
+  const section = document.querySelector(`.demostrator`);
+  section.innerHTML = trimbleWorkspaceHtml;
+  console.log("Trimble workspace added to section");
+}
+
+// Load the digital passport for a given element ID.
+async function loadPassport(elementID) {
+  // check in which stage we are in, based on the URL parameter or the config data.
+  const securlParams = new URLSearchParams(window.location.search);
+  let stage = securlParams.get("stage") || null;
+
+  if (!stage) {
+    // get the stage from the config data. TODO add a check to see if the config data is loaded before trying to access it
+    console.log("Loading config data to get stage");
+    let configData = await fetchJson(host + "config.json", "config");
+    if (!configData) {
+      configData = exampleConfig; // Fallback to example config if fetch fails
+      stage = 0;
+      console.error("Config data could not be loaded.");
+    } else {
+      const backupStage = configData?.stage ?? 0;
+      stage = stage ?? backupStage;
+    }
   }
+  console.log("stage is " + stage);
 
   // fetch the element JSON file based on the element ID. TODO add a check to see if the element JSON is loaded before trying to access it
   console.log("loading element file");
   const elementUrl = host + elementID + ".json";
   const elementData =
     (await fetchJson(elementUrl, elementID)) ?? examplePassport;
-  console.log(elementData);
 
-  // Start setting properties
-  document.getElementById("passport-id").innerHTML = elementID;
+  // get element data for the current stage and set it in the properties panel.
+  const warehouseURL = elementData?.["image"] || examplePassport?.["image"];
+  console.log("3d warehouse URL: " + warehouseURL);
+
+  // add the trimble workspace to the section for the passport viewer
+  addTrimbleWorkSpaceToSection(elementID, warehouseURL);
 
   // get element data for the current stage and set it in the properties panel.
   const elementPassport = elementData?.["lifecycle-data"]?.[stage] || "";
-  console.log(elementPassport);
 
   // first part for index section, which is the element ID and timestamp
   const psetIndexSectionElement =
@@ -283,5 +337,43 @@ document.addEventListener("DOMContentLoaded", async () => {
     psetPanelMiddleSection.appendChild(
       getPropertySetHTML(pset?.psetname, pset?.data),
     );
+  }
+}
+
+/*******************************************************/
+/**                                                   **/
+/**   Sketchup Iframe in woodcircles demonstrator     **/
+/**                                                   **/
+/*******************************************************/
+
+// Visualization of the building models based on the configuration JSON.
+async function loadDemonstrator() {
+  const configData = await fetchJson(host + "config.json", "config");
+  if (!configData) {
+    configData = exampleConfig; // Fallback to example config if fetch fails
+    console.error("Config data could not be loaded.");
+  }
+
+  const stage = configData?.stage ?? 0;
+  const modelUrl = configData?.stages[stage]?.model || "";
+  addModelviewertoSection(modelUrl, sectionclass);
+}
+
+/*******************************************************/
+/**                                                   **/
+/**       Document manipulator (entry point)          **/
+/**                                                   **/
+/*******************************************************/
+
+// Visualization of the digital passport based on the element JSONs.
+document.addEventListener("DOMContentLoaded", async () => {
+  //First we check of an element ID is provided in the URL parameters. If not, we will display the current building 3d model.
+  const urlParams = new URLSearchParams(window.location.search);
+  const elementID = urlParams.get("id");
+  if (!elementID) {
+    await loadDemonstrator();
+  } else {
+    console.log("id is " + elementID);
+    await loadPassport(elementID);
   }
 });
