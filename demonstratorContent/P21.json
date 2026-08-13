@@ -1,6 +1,6 @@
 {
-  "id": "S01",
-  "image": "https://3dwarehouse.sketchup.com/ar-view/55a4e094-33f4-48cd-a0c3-3e01a4323aa8",
+  "id": "P21",
+  "image": "https://3dwarehouse.sketchup.com/ar-view/c21eea1a-d04a-4f45-951b-342ff1943549",
   "lifecycle-data": [
     {
       "id": 0,
@@ -14,7 +14,7 @@
               "data": [
                 { "building-id": "Tartu001" },
                 {
-                  "dpp.permalink": "https://woodcircles.eu/demonstrator/?id=S01"
+                  "dpp.permalink": "https://woodcircles.eu/demonstrator/?id=P21"
                 }
               ]
             },
@@ -55,7 +55,7 @@
               "data": [
                 { "building-id": null },
                 {
-                  "dpp.permalink": "https://woodcircles.eu/demonstrator/?id=S01"
+                  "dpp.permalink": "https://woodcircles.eu/demonstrator/?id=P21"
                 }
               ]
             },
@@ -96,7 +96,7 @@
               "data": [
                 { "building-id": "Torino002" },
                 {
-                  "dpp.permalink": "https://woodcircles.eu/demonstrator/?id=S01"
+                  "dpp.permalink": "https://woodcircles.eu/demonstrator/?id=P21"
                 }
               ]
             },
@@ -137,7 +137,7 @@
               "data": [
                 { "building-id": null },
                 {
-                  "dpp.permalink": "https://woodcircles.eu/demonstrator/?id=S01"
+                  "dpp.permalink": "https://woodcircles.eu/demonstrator/?id=P21"
                 }
               ]
             },
@@ -178,7 +178,7 @@
               "data": [
                 { "building-id": "Rotterdam003" },
                 {
-                  "dpp.permalink": "https://woodcircles.eu/demonstrator/?id=S01"
+                  "dpp.permalink": "https://woodcircles.eu/demonstrator/?id=P21"
                 }
               ]
             },
