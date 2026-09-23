@@ -5,6 +5,7 @@
 /*******************************************************/
 
 // server path
+
 //const host = "http://127.0.0.1:5500/demonstratorContent/";
 const host =
   "https://raw.githubusercontent.com/Ricke9000/WoodCircles/refs/heads/main/demonstratorContent/";
