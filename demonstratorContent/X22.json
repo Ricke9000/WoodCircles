@@ -1,6 +1,6 @@
 {
-  "id": "S21",
-  "image": "https://3dwarehouse.sketchup.com/ar-view/c21eea1a-d04a-4f45-951b-342ff1943549",
+  "id": "X22",
+  "image": "https://loadplanner.storaenso.com/#/editor/view/69d77b0201423b564465bb7d?token=12eb4963018142009577083833525416&mode=guest&lang=EN",
   "lifecycle-data": [
     {
       "id": 0,
@@ -14,7 +14,7 @@
               "data": [
                 { "building-id": "Tartu001" },
                 {
-                  "dpp.permalink": "https://woodcircles.eu/demonstrator/?id=S21"
+                  "dpp.permalink": "https://woodcircles.eu/demonstrator/?id=S22"
                 }
               ]
             },
@@ -55,7 +55,7 @@
               "data": [
                 { "building-id": null },
                 {
-                  "dpp.permalink": "https://woodcircles.eu/demonstrator/?id=S21"
+                  "dpp.permalink": "https://woodcircles.eu/demonstrator/?id=S22"
                 }
               ]
             },
@@ -96,7 +96,7 @@
               "data": [
                 { "building-id": "Torino002" },
                 {
-                  "dpp.permalink": "https://woodcircles.eu/demonstrator/?id=S21"
+                  "dpp.permalink": "https://woodcircles.eu/demonstrator/?id=S22"
                 }
               ]
             },
