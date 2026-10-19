@@ -5,26 +5,12 @@
 /*******************************************************/
 
 // server path
-
 //const host = "http://127.0.0.1:5500/demonstratorContent/";
 const host =
   "https://raw.githubusercontent.com/Ricke9000/WoodCircles/refs/heads/main/demonstratorContent/";
 
-// example Config JSON
-const exampleConfig = {
-  phase: 0,
-  stage: 0,
-  stages: [
-    {
-      id: 0,
-      name: "Tartu",
-      "building-id": "Tartu001",
-      startdate: "2026-07-01T00:00:00Z",
-      model:
-        "https://3dwarehouse.sketchup.com/ar-view/0919b683-6140-466e-8ff7-29c510a68d80",
-    },
-  ],
-};
+const exampleModel =
+  "https://3dwarehouse.sketchup.com/ar-view/0919b683-6140-466e-8ff7-29c510a68d80";
 
 // example Passport JSON
 const examplePassport = {
@@ -80,6 +66,21 @@ const examplePassport = {
 // Class name of the section is "demostrator" in the HTML file, Not "demonstrator".
 // TODO: update the HTML file to correct the typo in the class name to "demonstrator" for consistency.
 const sectionclass = "demostrator";
+
+// Cookie that remembers the page should redirect instead of showing passports.
+const redirectCookieName = "needRedirection";
+
+// Cookie that remembers the current stage.
+const stageCookieName = "stage";
+
+// URL parameter key for redirection.
+const redirectParamKey = "redirect";
+
+// URL parameter key for stage.
+const stageParamKey = "stage";
+
+// Get URL parameters.
+const urlParams = new URLSearchParams(window.location.search);
 
 /*******************************************************/
 /**                                                   **/
@@ -255,28 +256,9 @@ function addTrimbleWorkSpaceToSection(elementID, warehouseURL) {
 }
 
 // Load the digital passport for a given element ID.
-async function loadPassport(elementID) {
-  // check in which stage we are in, based on the URL parameter or the config data.
-  const securlParams = new URLSearchParams(window.location.search);
-  let stage = securlParams.get("stage") || null;
-
-  if (!stage) {
-    // get the stage from the config data. TODO add a check to see if the config data is loaded before trying to access it
-    console.log("Loading config data to get stage");
-    let configData = await fetchJson(host + "config.json", "config");
-    if (!configData) {
-      configData = exampleConfig; // Fallback to example config if fetch fails
-      stage = 0;
-      console.error("Config data could not be loaded.");
-    } else {
-      const backupStage = configData?.stage ?? 0;
-      stage = stage ?? backupStage;
-    }
-  }
-  console.log("stage is " + stage);
-
+async function loadPassport(elementID, stage) {
   // fetch the element JSON file based on the element ID. TODO add a check to see if the element JSON is loaded before trying to access it
-  console.log("loading element file");
+  console.log("loading element file for " + elementID);
   const elementUrl = host + elementID + ".json";
   const elementData =
     (await fetchJson(elementUrl, elementID)) ?? examplePassport;
@@ -348,16 +330,97 @@ async function loadPassport(elementID) {
 /*******************************************************/
 
 // Visualization of the building models based on the configuration JSON.
-async function loadDemonstrator() {
-  const configData = await fetchJson(host + "config.json", "config");
-  if (!configData) {
-    configData = exampleConfig; // Fallback to example config if fetch fails
-    console.error("Config data could not be loaded.");
-  }
-
-  const stage = configData?.stage ?? 0;
-  const modelUrl = configData?.stages[stage]?.model || "";
+async function loadDemonstrator(configData, stage) {
+  const modelUrl = configData?.stages[stage]?.model || exampleModel;
   addModelviewertoSection(modelUrl, sectionclass);
+}
+
+/*******************************************************/
+/**                                                   **/
+/**                    Redirects                      **/
+/**                                                   **/
+/*******************************************************/
+
+// Step 1 helper: store the redirect flag in a cookie so later visits keep redirecting.
+function setNeedRedirectionCookie(path = "/") {
+  document.cookie = `${redirectCookieName}=true; path=${path}`;
+}
+
+// Step 2 helper: read the redirect flag from the cookies. Returns the stored value or null.
+function getNeedRedirectionCookie() {
+  const cookiePrefix = `${redirectCookieName}=`;
+  const cookieMatch = document.cookie
+    .split(";")
+    .map((entry) => entry.trim())
+    .find((entry) => entry.startsWith(cookiePrefix));
+
+  if (!cookieMatch) return null;
+  return cookieMatch.substring(cookiePrefix.length);
+}
+
+// Step 1 helper: remove the redirect flag cookie so the page continues normally.
+function removeNeedRedirectionCookie(path = "/") {
+  document.cookie = `${redirectCookieName}=; Max-Age=0; path=${path}`;
+}
+
+// Step 4 helper: fetch the redirects section of the element JSON and return the URL for the stage.
+async function getRedirectUrl(elementID, stage) {
+  const elementUrl = host + elementID + ".json";
+  const elementData = await fetchJson(elementUrl, elementID);
+  const redirect = elementData?.["redirects"]?.[stage];
+  return redirect?.url || null;
+}
+
+// Decide between redirecting and showing the passport for a given element ID.
+async function setRedirectCookies(redirectParam) {
+  console.log("redirect parameter is " + redirectParam);
+  if (redirectParam === "true") {
+    setNeedRedirectionCookie();
+    console.log("setNeedRedirectionCookie called");
+  } else if (redirectParam === "false") {
+    removeNeedRedirectionCookie();
+    console.log("removeNeedRedirectionCookie called");
+  }
+}
+
+async function redirect(elementID, stage) {
+  const redirectUrl = await getRedirectUrl(elementID, stage);
+
+  if (redirectUrl) {
+    window.location.href = redirectUrl;
+    return;
+  }
+}
+
+/*******************************************************/
+/**                                                   **/
+/**            stage cookie management                **/
+/**                                                   **/
+/*******************************************************/
+
+// Step 1 helper: store the redirect flag in a cookie so later visits keep redirecting.
+function setStageCookie(cookievalue) {
+  console.log("setting stage cookie to " + cookievalue);
+  //document.cookie = `${stageCookieName}=${cookievalue}; path="/";`;
+  const path = "/";
+  document.cookie = `${stageCookieName}=${cookievalue}; path=/;`;
+}
+
+// Step 2 helper: read the redirect flag from the cookies. Returns the stored value or null.
+function getStageCookie() {
+  const cookiePrefix = `${stageCookieName}=`;
+  const cookieMatch = document.cookie
+    .split(";")
+    .map((entry) => entry.trim())
+    .find((entry) => entry.startsWith(cookiePrefix));
+
+  if (!cookieMatch) return null;
+  return cookieMatch.substring(cookiePrefix.length);
+}
+
+// Step 1 helper: remove the redirect flag cookie so the page continues normally.
+function removeStageCookie(path = "/") {
+  document.cookie = `${stageCookieName}=; Max-Age=0; path=${path}`;
 }
 
 /*******************************************************/
@@ -368,13 +431,51 @@ async function loadDemonstrator() {
 
 // Visualization of the digital passport based on the element JSONs.
 document.addEventListener("DOMContentLoaded", async () => {
-  //First we check of an element ID is provided in the URL parameters. If not, we will display the current building 3d model.
-  const urlParams = new URLSearchParams(window.location.search);
+  // Get configuration file to determine the stage and other settings.
+  console.log("Loading Trimble Demonstrator configuration file...");
+  let configData = await fetchJson(host + "config.json", "config");
+  if (!configData) {
+    console.error(
+      "Config data could not be loaded. Using example file instead.",
+    );
+  }
+
+  //Check if the user manually set the need to redirect URL parameter.
+  const redirectParam = urlParams.get(redirectParamKey);
+  if (redirectParam !== null) {
+    await setRedirectCookies(redirectParam);
+  }
+
+  //Check if the user manually set the stage URL parameter.
+  const stageParam = urlParams.get(stageParamKey);
+  if (stageParam !== null) {
+    if (stageParam === "false") {
+      removeStageCookie();
+    } else {
+      setStageCookie(stageParam);
+    }
+  }
+
+  //Read the stage from the cookie or configuration if not set manually.
+  const cookieStage = parseInt(getStageCookie(), 10);
+  const stage = !isNaN(cookieStage)
+    ? cookieStage
+    : configData.stage != null
+      ? configData.stage
+      : 0;
+
+  //Check of an element ID is provided in the URL parameters. If not, we will display the current building 3d model.
   const elementID = urlParams.get("id");
+
+  // Decide what to load based on the presence of an element ID and redirection needs.
   if (!elementID) {
-    await loadDemonstrator();
+    console.log("Loading main demonstrator for stage " + stage);
+    await loadDemonstrator(configData, stage);
+  } else if (getNeedRedirectionCookie() === "true" || configData?.phase === 1) {
+    console.log("Redirecting page for element " + elementID);
+    await redirect(elementID, stage);
   } else {
-    console.log("id is " + elementID);
-    await loadPassport(elementID);
+    console.log("load passport for element " + elementID);
+    await loadPassport(elementID, stage);
   }
 });
